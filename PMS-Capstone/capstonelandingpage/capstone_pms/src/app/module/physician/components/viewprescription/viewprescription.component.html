@@ -1,0 +1,51 @@
+<button mat-icon-button style="float: right; margin: 5px" matDialogClose>
+    <mat-icon>close</mat-icon>
+  </button>
+  <div class="prescription">
+    <p><span>Prescription: </span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, dignissimos!</p>
+  </div>
+  <mat-dialog-content style="overflow: hidden;">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="position" class="table-row">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+      </ng-container>
+  
+      <!-- Drug Name Column -->
+      <ng-container matColumnDef="drugName" class="table-row">
+        <th mat-header-cell *matHeaderCellDef>Medicine/Drug Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.drugName }}</td>
+      </ng-container>
+  
+      <!-- Dosage -->
+      <ng-container matColumnDef="dosage" class="table-row">
+        <th mat-header-cell *matHeaderCellDef>Dosage</th>
+        <td mat-cell *matCellDef="let element">{{ element.dosage }}</td>
+      </ng-container>
+  
+      <!-- Notes -->
+      <ng-container matColumnDef="notes" class="table-row">
+        <th mat-header-cell *matHeaderCellDef>Notes</th>
+        <td mat-cell *matCellDef="let element">{{ element.notes }}</td>
+      </ng-container>
+  
+      <!-- Basic Diagonosis Information -->
+      <!-- <ng-container matColumnDef="diagonosis" class="table-row">
+        <th mat-header-cell *matHeaderCellDef>Basic Diagonosis Information</th>
+        <td mat-cell *matCellDef="let element">{{ element.diagonosis }}</td>
+      </ng-container> -->
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        class="table-row"
+      ></tr>
+    </table>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 15]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </mat-dialog-content>
+  

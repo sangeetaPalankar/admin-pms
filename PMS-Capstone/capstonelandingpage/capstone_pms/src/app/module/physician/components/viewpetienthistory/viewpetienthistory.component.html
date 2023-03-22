@@ -1,0 +1,85 @@
+<h4><mat-icon>history</mat-icon> Patient Health Information</h4>
+<div>
+  <div class="mainclass">
+    <div class="childclass childclass1">
+      <p><span>Name : </span>Aakash Sstroked</p>
+      <p><span>Age : </span>22</p>
+    </div>
+    <div class="childclass childclass2">
+      <p><span>Gender : </span>Male</p>
+      <p><span>Blood Group : </span>o +ve</p>
+    </div>
+    <div class="childclass childclass3">
+      <p><span>Last consultanton On : </span>16/02/2023</p>
+      <p><span>Last consultation with : </span> Dr.Aakash</p>
+    </div>
+  </div>
+</div>
+<h3 style="border-top: 1px solid grey; padding-top: 15px">Visit History</h3>
+<p>Dr. Andrew on 1/27/2023</p>
+
+<h3>Key Notes:</h3>
+<p>
+  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero fugit iusto
+  corrupti at voluptas cum.
+</p>
+
+<p style="border-top: 1px solid grey; padding-top: 15px">Observation made</p>
+<table mat-table class="mat-elevation-z8" [dataSource]="dataSource">
+  <!-- Position Column -->
+  <ng-container matColumnDef="id" class="table-row">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="testConducted" class="table-row">
+    <th mat-header-cell *matHeaderCellDef>Test Conducted</th>
+    <td mat-cell *matCellDef="let element">{{ element.testConducted }}</td>
+  </ng-container>
+
+  <!-- Booked On -->
+  <ng-container matColumnDef="actualResult" class="table-row">
+    <th mat-header-cell *matHeaderCellDef>Actual Result</th>
+    <td mat-cell *matCellDef="let element">{{ element.actualResult }}</td>
+  </ng-container>
+
+  <!-- Notes -->
+  <ng-container matColumnDef="status" class="table-row">
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+  </ng-container>
+
+  <!-- Basic Diagonosis Information -->
+  <ng-container matColumnDef="remarks" class="table-row">
+    <th mat-header-cell *matHeaderCellDef>Remarks</th>
+    <td mat-cell *matCellDef="let element">{{ element.remarks }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    class="table-row"
+  ></tr>
+</table>
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 15]"
+  showFirstLastButtons
+></mat-paginator>
+<button
+  mat-stroked-button
+  style="
+    background-color: #2d3663;
+    padding: 27px 20px;
+    color: whitesmoke;
+    margin-top: 25px;
+    margin-bottom: 15px;
+  "
+  color="primary"
+  mat-button
+  class="btn-class"
+  (click)="openDialogViewPrescription()"
+>
+  View prescription
+</button>

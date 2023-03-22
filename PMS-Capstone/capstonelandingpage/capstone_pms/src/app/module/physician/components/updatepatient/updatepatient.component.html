@@ -1,0 +1,161 @@
+<div class="top">
+  <img src="./assets/image/bed-pulse.svg" alt="" /><span
+    >Patient Health Information</span
+  >
+</div>
+<div>
+  <div class="mainclass">
+    <div class="childclass childclass1">
+      <p><span>Name: </span>Aakash Solanke</p>
+      <p><span>Age: </span>22</p>
+      <p><span>Gender: </span>Male</p>
+      <p><span>Contact Number: </span>9730282523</p>
+      <p><span>Address: </span>Sunder nager nageshwarwadi 431001</p>
+    </div>
+    <div class="childclass childclass2">
+      <p><span>Blood Group: </span>o +ve</p>
+      <p><span>Last consultanton On: </span>16/02/2023</p>
+      <p><span>Last consultation with: </span> Dr.Aakash</p>
+      <p>
+        <span>Key note on previous consultation : </span>Lorem ipsum dolor sit
+        amet, consectetur adipisicing elit. Tempore nemo, quibusdam quis
+        doloribus mollitia cupiditate.
+      </p>
+    </div>
+    <div class="childclass childclass3">
+      <p><span>Blood pressure: </span>Nil</p>
+      <p><span>Sugar: </span>Nil</p>
+      <p><span>Allergies: </span>skin</p>
+      <p><span>Hight: </span> 154 cm</p>
+      <p><span>Weight: </span>55 kg</p>
+      <p>
+        <span>Other notes to Doctor: </span>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore nemo,
+        quibusdam quis doloribus mollitia cupiditate.
+      </p>
+    </div>
+  </div>
+</div>
+<button
+  mat-stroked-button
+  color="primary"
+  class="historybtn"
+  class="btn"
+  [routerLink]="['/physician/patient-history']"
+>
+  <mat-icon style="color: white;">history</mat-icon> previous History
+</button>
+<div class="tableclass">
+    <h4>Observation Table</h4>
+    <button
+      mat-stroked-button
+      color="primary"
+      class="btn"
+      mat-button
+      (click)="openDialogNewObservation()"
+      style="float: right; margin-bottom: 15px"
+    >
+      New Observation
+    </button>
+    <table mat-table class="mat-elevation-z8" [dataSource]="dataSource">
+      <!-- Position Column -->
+      <ng-container matColumnDef="id" class="table-row">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="testConducted" class="table-row">
+        <th mat-header-cell *matHeaderCellDef>Test Conducted</th>
+        <td mat-cell *matCellDef="let element">{{ element.testConducted }}</td>
+      </ng-container>
+  
+      <!-- Booked On -->
+      <ng-container matColumnDef="actualResult" class="table-row">
+        <th mat-header-cell *matHeaderCellDef>Actual Result</th>
+        <td mat-cell *matCellDef="let element">{{ element.actualResult }}</td>
+      </ng-container>
+  
+      <!-- Notes -->
+      <ng-container matColumnDef="status" class="table-row">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+      </ng-container>
+  
+      <!-- Basic Diagonosis Information -->
+      <ng-container matColumnDef="remarks" class="table-row">
+        <th mat-header-cell *matHeaderCellDef>Remarks</th>
+        <td mat-cell *matCellDef="let element">{{ element.remarks }}</td>
+      </ng-container>
+  
+      <!-- Action -->
+      <ng-container matColumnDef="action" class="table-row">
+        <th mat-header-cell *matHeaderCellDef>Edit/Delete</th>
+        <td mat-cell *matCellDef="let element" class="editdelete">
+          <button
+            mat-stroked-button
+            color="primary"
+            class="btn1"
+            (click)="openDialogEditObservation()"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-stroked-button
+            color="accent"
+            class="btn2"
+            (click)="openDialogDeleteObservation()"
+          >
+          <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        class="table-row"
+      ></tr>
+    </table>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 15]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+  <button
+  mat-stroked-button
+  color="primary"
+  mat-button
+  class="btn-class btn"
+  (click)="openDialogEnterPrescription()"
+>
+  Enter prescription
+</button>
+<button
+  mat-stroked-button
+  color="primary"
+  mat-button
+  class="btn-class btn"
+  (click)="openDialogViewPrescription()"
+>
+  View prescription
+</button>
+<form action="">
+  <p><label for="">Enter Diagonosis:</label></p>
+  <textarea rows="4" cols="50"></textarea>
+</form>
+<div class="bottom-btn">
+  <button mat-raised-button style="background-color: #2d3663; color: white;" mat-button class="btn-class">
+    Save
+  </button>
+  <button
+    mat-raised-button
+    color="link"
+    mat-button
+    class="btn-class btn-class1"
+    [routerLink]="['/physician/dashboard']"
+  >
+    Cansel
+  </button>
+</div>

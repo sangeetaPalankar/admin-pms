@@ -1,0 +1,49 @@
+<mat-card class="Welcome">
+    <mat-icon>person</mat-icon>
+    <mat-card-header>
+        <mat-card-title><b>Welcome Admin!</b></mat-card-title>
+    </mat-card-header>
+    <br>
+</mat-card>
+
+<mat-card class="Card " *ngFor="let card of cards" routerLink={{card.rlink}}>
+    <mat-card-title><b> {{ card.name }}</b></mat-card-title>
+    <br>
+    <mat-icon>group</mat-icon>
+    <br>
+    <div>
+        <b>
+
+        </b>
+    </div>
+</mat-card>
+
+<mat-card class="mainCard">
+    <div class="buttons">
+        <button mat-raised-button color="primary" class="button" routerLink="patient-info">
+            View Registered Patient Info
+        </button>
+        <button mat-raised-button color="warn" class="button" routerLink="doctor-availability">
+            Docotor Availability Schedule
+        </button>
+
+        <!-- <a href="https://manage.auth0.com/dashboard/us/dev-qnzlgih035ihuldo/users">  
+        </a> -->
+
+        <button mat-raised-button color="primary" class="button" (click)="openDialogAddDoc()">
+            Add Doctor
+        </button>
+
+        <a href="https://manage.auth0.com/dashboard/us/dev-qnzlgih035ihuldo/users">
+            <button mat-raised-button color="primary" class="button">
+                Add Nurse
+            </button>
+        </a>
+
+        <a href="https://manage.auth0.com/dashboard/us/dev-qnzlgih035ihuldo/users">
+            <button mat-raised-button color="primary" class="button">
+                Add Admin
+            </button>
+        </a>
+
+    </div>

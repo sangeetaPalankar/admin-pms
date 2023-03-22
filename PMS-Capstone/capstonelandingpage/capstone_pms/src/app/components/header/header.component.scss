@@ -1,0 +1,38 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  .navigationmenu {
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    mat-toolbar {
+      background: #2d3663;
+      mat-icon,
+      span {
+        // color: #2D3663;
+        color: #47ccc8;
+      }
+    }
+  }
+  .btn {
+    background-color: #2d3663 !important;
+    mat-icon,
+    span {
+      color: #47ccc8;
+    }
+    &:hover {
+      background-color: #47ccc8 !important;
+      mat-icon,
+      span {
+        color: #2d3663;
+      }
+    }
+  }
+  .btn1 {
+    margin-top: -10px;
+  }
+  .btn3 {
+    margin-bottom: -8px;
+  }
+  
+  
