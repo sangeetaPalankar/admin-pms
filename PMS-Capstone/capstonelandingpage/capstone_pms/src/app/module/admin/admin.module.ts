@@ -10,7 +10,6 @@ import { DefaultComponent } from './components/default/default.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UpdateavailabilityComponent } from './components/updateavailability/updateavailability.component';
 import { PatientinfoComponent } from './components/patientinfo/patientinfo.component';
-import { AdminprofileComponent } from './components/adminprofile/adminprofile.component';
 import { DeleteavailabilityComponent } from './components/deleteavailability/deleteavailability.component';
 import { AdmininfoComponent } from './components/admininfo/admininfo.component';
 import { NurseinfoComponent } from './components/nurseinfo/nurseinfo.component';
@@ -50,7 +49,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     SidebarComponent,
     UpdateavailabilityComponent,
     PatientinfoComponent,
-    AdminprofileComponent,
     DeleteavailabilityComponent,
     AdmininfoComponent,
     NurseinfoComponent,

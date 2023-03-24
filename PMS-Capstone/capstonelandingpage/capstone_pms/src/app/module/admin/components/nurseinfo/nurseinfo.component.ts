@@ -14,9 +14,9 @@ import { AdminService } from '../../admin.service';
 
 export interface NurseData {
   nurse_email: number;
+  first_Name: string;
+  last_Name: string;
 }
-
-let ELEMENT_DATA: NurseData[] = [];
 
 @Component({
   selector: 'app-nurseinfo',
@@ -32,18 +32,15 @@ export class NurseinfoComponent {
 
   ngOnInit() {
     this.getNurses();
-    this.cdr.detectChanges();
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
   ngAfterViewInit() {}
-
   public nurses: NurseData[] = []; //datasource
-  displayedColumns: string[] = ['nurse_email'];
-  dataSource = new MatTableDataSource<NurseData>(ELEMENT_DATA);
+  displayedColumns: string[] = ['nurse_email', 'first_name', 'last_name'];
 
-  @ViewChild(MatPaginator) paginator: any;
-  @ViewChild(MatSort) sort: any;
+  dataSource = new MatTableDataSource<NurseData>();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  //pageSizes = [3, 5, 7];
+  @ViewChild(MatSort) sort!: MatSort;
 
   //sorting
   announceSortChange(sortState: Sort) {
@@ -67,15 +64,10 @@ export class NurseinfoComponent {
     this.nurseListService.getNurses().subscribe(
       (response: NurseData[]) => {
         this.nurses = response;
-        // var len = this.nurses.length;
-        // var i: number;
-        // for (i = 0; i <= len; i++) {
-        //   ELEMENT_DATA.push(this.nurses[i]);
-        // }
-        this.dataSource = new MatTableDataSource<NurseData>(ELEMENT_DATA);
-        // console.log(ELEMENT_DATA);
-        // console.log('datasource:', this.dataSource);
-        console.log(this.nurses);
+
+        this.dataSource = new MatTableDataSource<NurseData>(this.nurses);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

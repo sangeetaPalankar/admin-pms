@@ -24,14 +24,12 @@ export interface PatientData {
   gender: string;
 }
 
-let ELEMENT_DATA: PatientData[] = [];
-
 @Component({
   selector: 'app-patientinfo',
   templateUrl: './patientinfo.component.html',
   styleUrls: ['./patientinfo.component.scss'],
 })
-export class PatientinfoComponent implements AfterViewInit {
+export class PatientinfoComponent implements OnInit {
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
     private patientListService: AdminService,
@@ -40,11 +38,7 @@ export class PatientinfoComponent implements AfterViewInit {
 
   ngOnInit() {
     this.getPatients();
-    this.cdr.detectChanges();
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
-  ngAfterViewInit() {}
 
   public patients: PatientData[] = []; //datasource
   displayedColumns: string[] = [
@@ -58,10 +52,11 @@ export class PatientinfoComponent implements AfterViewInit {
     'address',
     'gender',
   ];
-  dataSource = new MatTableDataSource<PatientData>(ELEMENT_DATA);
 
-  @ViewChild(MatPaginator) paginator: any;
-  @ViewChild(MatSort) sort: any;
+  dataSource = new MatTableDataSource<PatientData>();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  //pageSizes = [3, 5, 7];
+  @ViewChild(MatSort) sort!: MatSort;
 
   //sorting
   announceSortChange(sortState: Sort) {
@@ -71,7 +66,6 @@ export class PatientinfoComponent implements AfterViewInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
-
   //searching
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -85,15 +79,10 @@ export class PatientinfoComponent implements AfterViewInit {
     this.patientListService.getPatients().subscribe(
       (response: PatientData[]) => {
         this.patients = response;
-        var len = this.patients.length;
-        var i: number;
-        for (i = 0; i <= len; i++) {
-          ELEMENT_DATA.push(this.patients[i]);
-        }
-        this.dataSource = new MatTableDataSource<PatientData>(ELEMENT_DATA);
-        console.log(ELEMENT_DATA);
-        console.log('datasource:', this.dataSource);
-        console.log(this.patients);
+
+        this.dataSource = new MatTableDataSource<PatientData>(this.patients);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

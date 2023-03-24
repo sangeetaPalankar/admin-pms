@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { UpdateavailabilityComponent } from '../updateavailability/updateavailability.component';
@@ -25,8 +25,10 @@ const doctor_data: DoctorData[] = [];
   templateUrl: './doctoravailability.component.html',
   styleUrls: ['./doctoravailability.component.scss'],
 })
-export class DoctoravailabilityComponent implements OnInit, AfterViewInit {
+export class DoctoravailabilityComponent implements OnInit {
   public doctors: DoctorData[] = [];
+  public updateDialogRef!: MatDialogRef<UpdateavailabilityComponent>;
+
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
     public dialog: MatDialog,
@@ -34,18 +36,11 @@ export class DoctoravailabilityComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.availablePhysicians();
-  }
+    this.doctorService.refreshNeeded.subscribe(() => {
+      this.availablePhysicians();
+    });
 
-  public availablePhysicians(): void {
-    this.doctorService.availablePhysicians().subscribe(
-      (response: DoctorData[]) => {
-        this.doctors = response;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
+    this.availablePhysicians();
   }
 
   displayedColumns: string[] = [
@@ -59,13 +54,10 @@ export class DoctoravailabilityComponent implements OnInit, AfterViewInit {
     'update',
     'delete',
   ];
-  dataSource = new MatTableDataSource<DoctorData>(doctor_data);
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-  @ViewChild(MatPaginator) paginator: any;
+  dataSource = new MatTableDataSource<DoctorData>();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  //pageSizes = [3, 5, 7];
+  @ViewChild(MatSort) sort!: MatSort;
 
   openDialogUpdate(pemail: string) {
     this.dialog.open(UpdateavailabilityComponent);
@@ -77,8 +69,22 @@ export class DoctoravailabilityComponent implements OnInit, AfterViewInit {
     this.doctorService.setThatVar(pemail);
   }
 
+  public availablePhysicians(): void {
+    this.doctorService.availablePhysicians().subscribe(
+      (response: DoctorData[]) => {
+        this.doctors = response;
+
+        this.dataSource = new MatTableDataSource<DoctorData>(this.doctors);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
   //sorting table
-  @ViewChild(MatSort) sort: any;
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);

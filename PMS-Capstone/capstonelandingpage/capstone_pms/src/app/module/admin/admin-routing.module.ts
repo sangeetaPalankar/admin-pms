@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DefaultComponent } from './components/default/default.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AdminprofileComponent } from './components/adminprofile/adminprofile.component';
 import { DoctoravailabilityComponent } from './components/doctoravailability/doctoravailability.component';
 import { PatientinfoComponent } from './components/patientinfo/patientinfo.component';
 import { AdmininfoComponent } from './components/admininfo/admininfo.component';
@@ -23,10 +22,6 @@ const routes: Routes = [
         path: '',
         redirectTo: '/admin/dashboard',
         pathMatch: 'full',
-      },
-      {
-        path: 'profile',
-        component: AdminprofileComponent,
       },
       {
         path: 'doctor-availability',

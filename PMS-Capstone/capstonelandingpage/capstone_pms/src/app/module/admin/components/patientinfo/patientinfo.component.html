@@ -14,7 +14,7 @@
         </p>
 
         <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="patients" matSort (matSortChange)="announceSortChange($event)">
+            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
                 <!-- id Column -->
                 <ng-container matColumnDef="patientId" class="table-row">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by ID">

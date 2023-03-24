@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { DoctorData } from '../doctoravailability/doctoravailability.component';
+import {
+  DoctorData,
+  DoctoravailabilityComponent,
+} from '../doctoravailability/doctoravailability.component';
 import { AdminService } from '../../admin.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
@@ -16,6 +19,7 @@ export class UpdateavailabilityComponent {
   public drName: any;
   public startDate: any;
   public endDate: any;
+  public parent!: DoctoravailabilityComponent;
 
   // minDate: Date;
   // maxDate: Date;
@@ -30,7 +34,6 @@ export class UpdateavailabilityComponent {
     // this.minDate = new Date(currentYear - 20, 0, 1);
     // this.maxDate = new Date(currentYear + 1, 11, 31);
   }
-
   todayDate: Date = new Date();
 
   ngOnInit() {
@@ -41,9 +44,9 @@ export class UpdateavailabilityComponent {
     console.log(this.doctorService.getThatVar());
   }
 
-  reloadCurrentPage() {
-    this.ngOnInit();
-  }
+  // reloadCurrentPage() {
+  //   this.ngOnInit();
+  // }
 
   selectedMatDate!: Date;
 
@@ -52,8 +55,10 @@ export class UpdateavailabilityComponent {
       (response: DoctorData) => {
         console.log(response);
         this.doctorService.availablePhysiciansUpdate(doctor);
+        // this.dialogRef.afterClosed().subscribe(() => {
+        //   this.parent.availablePhysicians();
+        // });
         this.dialogRef.close();
-        this.reloadCurrentPage();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

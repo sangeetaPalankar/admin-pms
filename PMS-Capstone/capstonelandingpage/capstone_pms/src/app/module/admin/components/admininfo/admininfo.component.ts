@@ -18,13 +18,12 @@ export interface AdminData {
   last_Name: string;
 }
 
-let ELEMENT_DATA: AdminData[] = [];
 @Component({
   selector: 'app-admininfo',
   templateUrl: './admininfo.component.html',
   styleUrls: ['./admininfo.component.scss'],
 })
-export class AdmininfoComponent {
+export class AdmininfoComponent implements OnInit {
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
     private patientListService: AdminService,
@@ -33,18 +32,14 @@ export class AdmininfoComponent {
 
   ngOnInit() {
     this.getAdmins();
-    this.cdr.detectChanges();
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
-  ngAfterViewInit() {}
 
   public admins: AdminData[] = []; //datasource
   displayedColumns: string[] = ['admin_email', 'first_name', 'last_name'];
-  dataSource = new MatTableDataSource<AdminData>(ELEMENT_DATA);
-
-  @ViewChild(MatPaginator) paginator: any;
-  @ViewChild(MatSort) sort: any;
+  dataSource = new MatTableDataSource<AdminData>();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  //pageSizes = [3, 5, 7];
+  @ViewChild(MatSort) sort!: MatSort;
 
   //sorting
   announceSortChange(sortState: Sort) {
@@ -68,15 +63,10 @@ export class AdmininfoComponent {
     this.patientListService.getAdmins().subscribe(
       (response: AdminData[]) => {
         this.admins = response;
-        // var len = this.admins.length;
-        // var i: number;
-        // for (i = 0; i <= len; i++) {
-        //   ELEMENT_DATA.push(this.admins[i]);
-        // }
-        this.dataSource = new MatTableDataSource<AdminData>(ELEMENT_DATA);
-        console.log(ELEMENT_DATA);
-        // console.log('datasource:', this.dataSource);
-        console.log(this.admins);
+
+        this.dataSource = new MatTableDataSource<AdminData>(this.admins);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
