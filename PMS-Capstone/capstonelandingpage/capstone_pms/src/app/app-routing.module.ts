@@ -1,16 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './components/index/index.component';
+import { AfterauthComponent } from './components/afterauth/afterauth.component';
+import { HerosectionComponent } from './components/content/herosection/herosection.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/index',
-    pathMatch: 'full',
+    component: IndexComponent,
+    // redirectTo: '/index',
+    // pathMatch: 'full',
   },
   {
     path: 'index',
     component: IndexComponent,
+  },
+
+  {
+    path: 'herosection',
+    component: HerosectionComponent,
   },
   {
     path: 'physician',

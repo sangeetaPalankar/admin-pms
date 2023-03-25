@@ -5,21 +5,12 @@
     </button>
     <span>PMS</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
-      matTooltip="Patient Login/Registration">
-      <mat-icon>people</mat-icon>
-    </button>
-    <button mat-icon-button aria-label="Example icon-button with a menu">
-      <mat-icon>person_add</mat-icon>
-    </button>
 
     <span *ngIf="(auth.isAuthenticated$ | async) === false">
-      <a mat-raised-button color="accent" (click)="loginWithRedirect()" routerLink="admin/dashboard">Login</a>
+      <a mat-raised-button color="accent" (click)="loginWithRedirect()">Login</a>
     </span>
     <span *ngIf="auth.isAuthenticated$ | async">
       <a mat-raised-button color="accent" (click)="logout()">Logout</a>
     </span>
-
-
   </mat-toolbar>
 </div>

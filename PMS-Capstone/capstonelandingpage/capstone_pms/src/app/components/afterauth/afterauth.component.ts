@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
-  selector: 'app-herosection',
-  templateUrl: './herosection.component.html',
-  styleUrls: ['./herosection.component.scss'],
+  selector: 'app-afterauth',
+  templateUrl: './afterauth.component.html',
+  styleUrls: ['./afterauth.component.scss'],
 })
-export class HerosectionComponent {
+export class AfterauthComponent implements OnInit {
   profileJson: string = 'none';
   ShowRole = false;
 
